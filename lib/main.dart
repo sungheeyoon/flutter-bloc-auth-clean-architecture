@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth_template/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:flutter_auth_template/features/auth/presentation/pages/sign_in_page.dart';
+import 'package:flutter_auth_template/init_dependencies.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initDependencies();
+  runApp(
+    BlocProvider(
+      create: (_) => getIt<AuthBloc>(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +26,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const SignInPage(),
     );
   }
 }

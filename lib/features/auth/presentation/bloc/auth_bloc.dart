@@ -1,3 +1,4 @@
+import 'package:flutter_auth_template/core/usecase/usecase.dart';
 import 'package:flutter_auth_template/features/auth/domain/entities/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_template/features/auth/domain/usecases/sign_in.dart';
@@ -11,6 +12,7 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SignIn _signIn;
   final SignUp _signUp;
+  final SignOut _signOut;
 
   AuthBloc({
     required SignIn signIn,
@@ -18,10 +20,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required SignOut signOut,
   })  : _signIn = signIn,
         _signUp = signUp,
+        _signOut = signOut,
         super(AuthInitial()) {
     on<AuthEvent>((_, emit) => emit(AuthLoading()));
     on<AuthSignUp>(_onAuthSignUp);
     on<AuthSignIn>(_onAuthSignIn);
+    on<AuthSignOut>(_onAuthSignOut);
+  }
+
+  void _onAuthSignOut(
+    AuthSignOut event,
+    Emitter<AuthState> emit,
+  ) {
+    _signOut(NoParams());
   }
 
   void _onAuthSignUp(
