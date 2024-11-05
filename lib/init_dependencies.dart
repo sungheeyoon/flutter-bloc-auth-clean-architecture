@@ -33,6 +33,7 @@ void _initAuth() {
     ..registerFactory<AuthRepository>(
       () => AuthRepositoryImpl(
         getIt(),
+        getIt(),
       ),
     )
     // Usecase
@@ -56,6 +57,7 @@ void _initAuth() {
         signIn: getIt(),
         signUp: getIt(),
         signOut: getIt(),
+        currentUser: getIt(),
       ),
     );
 }
