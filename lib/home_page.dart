@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth_template/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatelessWidget {
   static route() => MaterialPageRoute(
@@ -8,9 +10,17 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Column(
-        children: [Text('is logged in')],
+        children: [
+          const Text('is logged in'),
+          ElevatedButton(
+            onPressed: () {
+              context.read<AuthBloc>().add(AuthSignOut());
+            },
+            child: const Text('Sign Out'),
+          ),
+        ],
       ),
     );
   }
