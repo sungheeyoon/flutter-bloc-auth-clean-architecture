@@ -46,8 +46,8 @@ class _MyAppState extends State<MyApp> {
         selector: (AppUserState state) {
           return state is AppUserIsLoggedIn;
         },
-        builder: (context, isloggedIn) {
-          if (isloggedIn) {
+        builder: (context, isLoggedIn) {
+          if (isLoggedIn) {
             return const HomePage();
           }
           return const SignInPage();
